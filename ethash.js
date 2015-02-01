@@ -82,7 +82,7 @@ function fnv(x, y)
 
 function computeCache(params, seedWords)
 {
-	var cache = new Uint32Array(params.cacheSize >> 4);
+	var cache = new Uint32Array(params.cacheSize >> 2);
 	var cacheNodeCount = params.cacheSize >> 6;
 
 	// Initialize cache
