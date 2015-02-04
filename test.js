@@ -41,7 +41,7 @@ if (testHexString != util.bytesToHexString(util.hexStringToBytes(testHexString))
 
 		
 var header = util.hexStringToBytes("c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470");
-var nonce = util.hexStringToBytes("0000000000000000000000000000000000000000000000000000000000000000");
+var nonce = util.hexStringToBytes("0000000000000000");
 var hash;
 
 startTime = new Date().getTime();

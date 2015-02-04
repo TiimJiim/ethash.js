@@ -164,7 +164,8 @@ function computeHashInner(mix, params, cache, rand1, tempNode)
 	var rand2 = bbsClamp(mix[0], P2);
 	for (var a = 0; a < mixParents; a = (a+1)|0)
 	{
-		var d = (mod32(mix[a & (mixWordCount - 1)] ^ rand2, dagPageCount) * mixNodeCount)|0;
+		var p = mod32(mix[16 + (a & (mixWordCount - 1))] ^ rand2, dagPageCount);
+		var d = (p * mixNodeCount)|0;
 		
 		for (var n = 0, w = 16; n < mixNodeCount; n = (n+1)|0)
 		{
@@ -226,11 +227,11 @@ exports.Ethash = function(params, seed)
 		// todo: big-endian conversion. Ideally header/nonce are in little endian format.
 		mixBytes.set(header, 0);
 		mixBytes.set(nonce, 32);
-		keccak.digestWords(mixWords, 0, 16, mixWords, 0, 16);
+		keccak.digestWords(mixWords, 0, 16, mixWords, 0, 8 + nonce.length/4);
 		
 		// compute mix
 		computeHashInner(mixWords, params, cache, rand1, tempNode);
-		
+			
 		// final Keccak hashes
 		keccak.digestWords(mixWords, 16, 8, mixWords, 0, mixWords.length);	// Keccak-256(s + mix)
 		keccak.digestWords(retWords, 0, 8, mixWords, 0, 24);				// Keccak-256(s + Keccak-256(s + mix))
