@@ -90,7 +90,7 @@ function makeKeccak_f1600()
 	};
 	
 	var str = "";	
-	str += "function keccak_f1600(strState, strOffset, strSize, inState)\n";
+	str += "function keccak_f1600(outState, outOffset, outSize, inState)\n";
 	str += "{\n";
 	
 	for (var i = 0; i < 25; ++i)
@@ -186,11 +186,11 @@ function makeKeccak_f1600()
 	{
 		if (i == 4 || i == 8)
 		{
-			str += "\tif (strSize == " + i*2 + ")\n\t\treturn;\n";
+			str += "\tif (outSize == " + i*2 + ")\n\t\treturn;\n";
 		}
 		for (var w = 0; w <= 1; ++w)
 		{
-			str += "\tstrState[strOffset|"+(i<<1|w)+"] = " + a(i,w) + ";\n";
+			str += "\toutState[outOffset|"+(i<<1|w)+"] = " + a(i,w) + ";\n";
 		}
 	}
 	str += "}\n";
