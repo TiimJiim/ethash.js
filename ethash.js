@@ -1,6 +1,6 @@
 // ethash.js
 // Tim Hughes <tim@twistedfury.com>
-// Revision 14
+// Revision 19
 
 /*jslint node: true, shadow:true */
 "use strict";
@@ -128,12 +128,12 @@ function convertSeed(seed)
 exports.defaultParams = function()
 {
 	return {
-		cacheSize: 33554432,
+		cacheSize: 1048384,
 		cacheRounds: 3,
-		dagSize: 1073741824,
+		dagSize: 1073739904,
 		dagParents: 256,
 		mixSize: 128,
-		mixParents: 128,
+		mixParents: 64,
 	};
 };
 
